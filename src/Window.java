@@ -1,4 +1,5 @@
 import java.awt.Cursor;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
@@ -10,17 +11,17 @@ import java.util.Observer;
 
 import javax.swing.JFrame;
 
-public class Window extends JFrame implements MouseListener,Observer {
+public class Window extends JFrame implements MouseListener {
 	Framework framework = new Framework();
 	Canvas canvas = new Canvas();
 
 	public Window() {
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Shoot the duck");
-		setSize(500, 300);
-		setCursor();
-		canvas.addObserver(this);
+		setSize(1280, 969);
+		setCursor();		
 		framework.addObserver(canvas);
-		add(canvas.getPanel());
+		add(canvas);
 	}
 
 	private void setCursor() {
@@ -40,8 +41,7 @@ public class Window extends JFrame implements MouseListener,Observer {
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		System.out.println("Clicks!!");
-		framework.notifyObservers();
+		System.out.println("Clicks!!");		
 	}
 
 	@Override
@@ -68,10 +68,4 @@ public class Window extends JFrame implements MouseListener,Observer {
 
 	}
 
-	@Override
-	public void update(Observable o, Object arg) {
-		removeAll();
-		add(canvas.getPanel());
-		repaint();
-	}
 }
