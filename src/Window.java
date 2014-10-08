@@ -1,16 +1,16 @@
 import java.awt.Cursor;
-import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
-import java.util.Observable;
-import java.util.Observer;
+import java.net.URL;
 
 import javax.swing.JFrame;
 
+@SuppressWarnings("serial")
 public class Window extends JFrame implements MouseListener {
 	Framework framework = new Framework();
 	Canvas canvas = new Canvas();
@@ -40,8 +40,13 @@ public class Window extends JFrame implements MouseListener {
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent arg0) {
-		System.out.println("Clicks!!");		
+	public void mouseClicked(MouseEvent e) {
+		int x=e.getX();
+	    int y=e.getY();		
+		// check if any of ducks get killed
+		framework.checkForKilled(new Point(x,y)); 
+		Sound.play("C:\\Users\\dgoncharenko\\Documents\\GitHub\\Shoot the duck\\Gun_Shot.wav");
+		//Sound.play(""
 	}
 
 	@Override
