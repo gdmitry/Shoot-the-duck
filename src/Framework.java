@@ -1,5 +1,7 @@
+import java.awt.Dimension;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -82,6 +84,7 @@ public class Framework extends Observable {
 		}
 		for (Duck duck:remDucks) {
 			ducks.remove(duck);
+			Sound.play("C:\\Users\\Dima\\Documents\\Github\\Shoot-the-duck\\resources\\sounds\\Duck Pato.wav");
 		}
 		return true;
 	}
@@ -104,5 +107,10 @@ public class Framework extends Observable {
 			}
 		}
 		return result;
+	}
+	private void setScreen() {
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		double width = screenSize.getWidth();
+		double height = screenSize.getHeight();
 	}
 }

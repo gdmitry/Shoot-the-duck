@@ -13,16 +13,17 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class Canvas extends JPanel implements Observer {	
 	private ArrayList<Duck> ducks = new ArrayList<>();
+	private static BufferedImage image = null;
 	
-	private BufferedImage showBackground() {		
-		File file = new File("resources/images/background.jpg");
-		String absolutePath = file.getAbsolutePath();
-		BufferedImage image = null;
+	public static BufferedImage showBackground() {		
+		if (image==null) {
+		File file = new File("resources/images/background.jpg");			
 		try {
-			image = ImageIO.read(new File(absolutePath));
+			image = ImageIO.read(file);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
 		}
 		return image;
 	}	
@@ -43,6 +44,10 @@ public class Canvas extends JPanel implements Observer {
 		for (Duck duck:ducks) {
 			g2d.drawImage(duck.getImage(), duck.location.x, duck.location.y, null);		
 		}
+	}
+	
+	public void setBackground(BufferedImage image) {
+		this.image=image;
 	}
 	
 }
