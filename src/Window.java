@@ -44,7 +44,7 @@ public class Window extends JFrame implements MouseListener {
 		int y = e.getY();
 		// check if any of ducks get killed
 		framework.checkForKilled(new Point(x, y));
-		SoundManager.playGun();
+		//SoundManager.playGun();
 
 	}
 

@@ -12,7 +12,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 public class SoundManager {	
 	final static File duck = new File("resources/sounds/duck.wav");
 	final static File gun = new File("resources/sounds/gun.wav");
-	
+	final static File game_over=new File("resources/sounds/gun.wav");
 	public static void playDuck() {
 		play(duck);
 	}

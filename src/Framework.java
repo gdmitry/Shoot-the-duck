@@ -14,7 +14,7 @@ import javax.swing.Timer;
 public class Framework extends Observable {
 	static final int DUCKS_NUM_MIN = 1;
 	static final int DUCKS_NUM_MAX = 9;
-	static final int STEP = 5;
+	static final int STEP = 10;
 	static final int LACKE_TOP = 900;
 	static final int LACKE_BOTTOM = 600;
 	static final int LACKE_LEFT = 0;
@@ -108,9 +108,5 @@ public class Framework extends Observable {
 		}
 		return result;
 	}
-	private void setScreen() {
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		double width = screenSize.getWidth();
-		double height = screenSize.getHeight();
-	}
+	
 }
