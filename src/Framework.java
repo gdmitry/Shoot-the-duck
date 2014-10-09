@@ -84,7 +84,7 @@ public class Framework extends Observable {
 		}
 		for (Duck duck:remDucks) {
 			ducks.remove(duck);
-			Sound.play("C:\\Users\\Dima\\Documents\\Github\\Shoot-the-duck\\resources\\sounds\\Duck Pato.wav");
+			SoundManager.playDuck();
 		}
 		return true;
 	}

@@ -9,11 +9,19 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 
-public class Sound {	
-
-	public  static void play(String audioFilePath ) {
-		File audioFile = new File(audioFilePath);
-
+public class SoundManager {	
+	final static File duck = new File("resources/sounds/duck.wav");
+	final static File gun = new File("resources/sounds/gun.wav");
+	
+	public static void playDuck() {
+		play(duck);
+	}
+	
+	public static void playGun() {
+		play(gun);
+	}
+	
+	private static void play(File audioFile ) {
 		try {
 			AudioInputStream audioStream = AudioSystem
 					.getAudioInputStream(audioFile);
