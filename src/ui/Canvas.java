@@ -1,14 +1,13 @@
-import java.awt.Graphics;
+package ui;import java.awt.Graphics;
+
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+import domain.*;
+import managers.PictureManager;
 
 @SuppressWarnings("serial")
 public class Canvas extends JPanel implements Observer {	
@@ -28,7 +27,7 @@ public class Canvas extends JPanel implements Observer {
 				RenderingHints.VALUE_ANTIALIAS_ON);		
 		g2d.drawImage(PictureManager.getBackgroundImage(), 0, 0, null);
 		for (Duck duck:ducks) {
-			g2d.drawImage(duck.getImage(), duck.location.x, duck.location.y, null);		
+			g2d.drawImage(duck.getImage(), duck.getLocation().x, duck.getLocation().y, null);		
 		}
 	}	
 	

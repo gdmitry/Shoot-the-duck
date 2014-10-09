@@ -1,3 +1,5 @@
+package ui;
+
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -6,8 +8,10 @@ import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
-
 import javax.swing.JFrame;
+import domain.Framework;
+import managers.PictureManager;
+import managers.SoundManager;
 
 @SuppressWarnings("serial")
 public class Window extends JFrame implements MouseListener {
@@ -17,10 +21,11 @@ public class Window extends JFrame implements MouseListener {
 	public Window() {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Shoot the duck");
+		setResizable(false);
 		this.setSize(new Dimension(PictureManager.getBackgroundImage().getWidth(), PictureManager.getBackgroundImage().getHeight()));
 		setCursor();
 		framework.addObserver(canvas);
-		add(canvas);
+		add(canvas);		
 	}	
 	
 	private void setCursor() {
@@ -44,7 +49,7 @@ public class Window extends JFrame implements MouseListener {
 		int y = e.getY();
 		// check if any of ducks get killed
 		framework.checkForKilled(new Point(x, y));
-		//SoundManager.playGun();
+		SoundManager.playGun();
 
 	}
 

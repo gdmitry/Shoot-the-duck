@@ -1,30 +1,31 @@
-import java.awt.Dimension;
-import java.awt.MouseInfo;
+package domain;
 import java.awt.Point;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Random;
-
 import javax.swing.Timer;
+import managers.PictureManager;
+import managers.SoundManager;
 
 public class Framework extends Observable {
 	static final int DUCKS_NUM_MIN = 1;
 	static final int DUCKS_NUM_MAX = 9;
-	static final int STEP = 10;
-	static final int LACKE_TOP = 900;
-	static final int LACKE_BOTTOM = 600;
-	static final int LACKE_LEFT = 0;
-	static final int LACKE_RIGHT = 1280;
+	static final int STEP = 5;
+	
+	private static int LACKE_TOP = (int) (900*PictureManager.getRatio());
+	private static int LACKE_BOTTOM = (int) (600*PictureManager.getRatio())-20;
+	private static int LACKE_LEFT = 0;
+	private static int LACKE_RIGHT = (int) (1280*PictureManager.getRatio());
 
 	private ArrayList<Duck> ducks = new ArrayList<>();
 	private ArrayList<Observer> observers = new ArrayList<>();
 	private int ducksNum = new Random().nextInt(DUCKS_NUM_MAX) + DUCKS_NUM_MIN;
 
 	public Framework() {
+		
 		setUpDucks();
 		Timer displayTimer = new Timer(100, listener);
 		displayTimer.start();

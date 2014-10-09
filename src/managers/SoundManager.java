@@ -1,3 +1,5 @@
+package managers;
+
 import java.io.File;
 import java.io.IOException;
 import javax.sound.sampled.AudioFormat;
@@ -7,7 +9,6 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-
 
 public class SoundManager {	
 	final static File duck = new File("resources/sounds/duck.wav");

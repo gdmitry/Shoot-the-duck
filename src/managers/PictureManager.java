@@ -1,3 +1,5 @@
+package managers;
+
 import java.awt.AlphaComposite;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
@@ -6,7 +8,6 @@ import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 
 public class PictureManager {
@@ -23,8 +24,8 @@ public class PictureManager {
 		int b_height = PictureManager.getBackgroundImage().getHeight();
 		int b_width = PictureManager.getBackgroundImage().getWidth();
 		ratio=height/b_height;
-		if (ratio<1) {
-			background_image=resizeImage(getBackgroundImage(),(int)ratio*b_width,(int)height);
+		if ((ratio<1)&&(ratio>0)){
+			background_image=resizeImage(getBackgroundImage(),(int)(ratio*b_width),(int)height);
 		}
 	}
 
@@ -59,5 +60,9 @@ public class PictureManager {
 		graphics2D.drawImage(image, 0, 0, width, height, null);
 		graphics2D.dispose();
 		return bufferedImage;
+	}
+	
+	public static double getRatio() {
+		return ratio;
 	}
 }
