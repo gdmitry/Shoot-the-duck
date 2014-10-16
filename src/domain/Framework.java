@@ -21,11 +21,13 @@ public class Framework extends Observable {
 	private static int LACKE_RIGHT = (int) (1280*PictureManager.getRatio());
 
 	private ArrayList<Duck> ducks = new ArrayList<>();
+	private ArrayList<Duck> ducksForMissed = new ArrayList<>();
 	private ArrayList<Observer> observers = new ArrayList<>();
 	private int ducksNum = new Random().nextInt(DUCKS_NUM_MAX) + DUCKS_NUM_MIN;
-
-	public Framework() {
-		
+	private int num_of_killed=0;
+	private int num_of_missed=0;
+	
+	public Framework() {		
 		setUpDucks();
 		Timer displayTimer = new Timer(100, listener);
 		displayTimer.start();
@@ -37,6 +39,9 @@ public class Framework extends Observable {
 		public void actionPerformed(ActionEvent arg0) {
 			moveDucks(STEP, 0);
 			notifyObservers();
+			if (num_of_killed==ducksNum) System.exit(1);
+			if (num_of_missed==ducksNum) System.exit(-1);
+			if (num_of_missed+num_of_killed==ducksNum) System.exit(0);
 		}
 	};
 
@@ -63,8 +68,11 @@ public class Framework extends Observable {
 					* Duck.getDuckHeight())
 					+ LACKE_BOTTOM + Duck.getDuckHeight();
 			System.out.println("X: " + x + " Y: " + y);
-			ducks.add(new Duck(x, y));
+			Duck duck=new Duck(x, y);
+			ducks.add(duck);
+			ducksForMissed.add(duck);
 		}
+		
 	}
 
 	private void moveDucks(int x, int y) {
@@ -85,6 +93,7 @@ public class Framework extends Observable {
 		}
 		for (Duck duck:remDucks) {
 			ducks.remove(duck);
+			num_of_killed++;
 			SoundManager.playDuck();
 		}
 		return true;
@@ -108,6 +117,36 @@ public class Framework extends Observable {
 			}
 		}
 		return result;
+	}
+	
+	public int getNumKilled() {
+		return num_of_killed;
+	}
+	
+	public boolean isAnyDuckVisible() {
+		return false;
+		
+	}
+	
+	public int getNumMissed() {		
+		ArrayList<Duck> remDucks=new ArrayList<Duck>();
+		
+		for (Duck duck : ducksForMissed) {
+			if (duck.getLocation().x<LACKE_LEFT) {
+				remDucks.add(duck);
+			}
+		}
+		
+		for (Duck duck:remDucks) {
+			ducksForMissed.remove(duck);
+			num_of_missed++;
+		}
+		
+		return num_of_missed;
+	}
+
+	public int getNumTotal() {
+		return ducksNum; 
 	}
 	
 }

@@ -1,21 +1,23 @@
-package ui;import java.awt.Graphics;
-
+package ui;import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+
 import javax.swing.JPanel;
+
 import domain.*;
 import managers.PictureManager;
 
 @SuppressWarnings("serial")
 public class Canvas extends JPanel implements Observer {	
-	private ArrayList<Duck> ducks = new ArrayList<>();
+	private Framework framework;
 	
 	@Override
 	public void update(Observable framework, Object arg1) {
-		ducks=((Framework) framework).getDucks();
+		this.framework=(Framework) framework;
 		repaint();
 	}
 
@@ -26,9 +28,17 @@ public class Canvas extends JPanel implements Observer {
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);		
 		g2d.drawImage(PictureManager.getBackgroundImage(), 0, 0, null);
-		for (Duck duck:ducks) {
-			g2d.drawImage(duck.getImage(), duck.getLocation().x, duck.getLocation().y, null);		
+		if(framework!=null) {
+			for (Duck duck:framework.getDucks()) {
+				g2d.drawImage(duck.getImage(), duck.getLocation().x, duck.getLocation().y, null);		
+			}
+			/* setting font to string message */
+			g2d.setFont(new Font("TimesRoman", Font.BOLD, 14)); 
+			g2d.drawString("killed: "+Integer.toString(framework.getNumKilled()), 10, 30);
+			g2d.drawString("missed: "+Integer.toString(framework.getNumMissed()), 100, 30);
+			g2d.drawString("total: "+Integer.toString(framework.getNumTotal()), 180, 30);
 		}
+		
 	}	
 	
 }
