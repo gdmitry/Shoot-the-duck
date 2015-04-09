@@ -22,7 +22,7 @@ public class PictureManager {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();		
 		double height = screenSize.getHeight()-50;
 		int b_height = PictureManager.getBackgroundImage().getHeight();
-		int b_width = PictureManager.getBackgroundImage().getWidth();
+		int b_width = PictureManager.getBackgroundImage().getWidth()-50;
 		ratio=height/b_height;
 		if ((ratio<1)&&(ratio>0)){
 			background_image=resizeImage(getBackgroundImage(),(int)(ratio*b_width),(int)height);
